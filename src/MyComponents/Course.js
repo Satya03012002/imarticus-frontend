@@ -5,9 +5,11 @@ import axios from "axios"
 
 import Topic from './Topic';
 
-function Course() {
 
-    const [open, setOpen] = useState(false);
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+
+
+function Course() {
 
 
     const [courseData, setcourseData] = useState({})
@@ -16,11 +18,16 @@ function Course() {
     const [imageurl, setimageurl] = useState('')
     const [units, setunits] = useState([])
 
-    // title: '',
-    // description: '',
-    // imageurl: '',
-    // units: [],
-    var id;
+
+    const [ user, setUser ] = useState([]);
+    const [ profile, setProfile ] = useState([]);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setUser(codeResponse),
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+
 
     const coursedata = {}
 
@@ -54,28 +61,76 @@ function Course() {
 
     }
 
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };
 
 
     useEffect(() => {
         const subscribe = () => {
 
             sendRequest().then((data) => setcourseData(data))
-            // console.log("data--->", data);
-            //  setuserData([...data])
+          
             console.log("courseData", coursedata)
+
+           
+                if (user) {
+                    axios
+                        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                            headers: {
+                                Authorization: `Bearer ${user.access_token}`,
+                                Accept: 'application/json'
+                            }
+                        })
+                        .then((res) => {
+                            setProfile(res.data);
+                        })
+                        .catch((err) => console.log(err));
+                }
+    
 
 
         }
+
+
         return subscribe();
 
 
 
 
-    }, [id])
+    }, [user]
+    )
 
     return (
         <>
-                  
+      
+            {profile ? (
+
+                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                    <div style={{ display: "flex", margin: "5px" }}>
+
+                        <img src={profile.picture} alt="user image" />
+                       
+                        <div style={{ margin: "5px" }}>
+                            <p>Name: {profile.name}</p>
+                            <p>Email Address: {profile.email}</p>
+                        </div>
+
+                    
+                    </div>
+                    <div><button onClick={logOut} style={{ margin: "5px" }}>Log out</button></div>
+                    
+                </div>
+            ) : (
+                <div style={{ display: "flex", flexDirection: "row-reverse", margin: "10px" }}>
+                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                </div>
+            )}
+            {/* </nav> */}
+
+
+
             <div class="card mb-3" style={{ margin: "190px" }}>
                 <div class="row g-0">
                     <div class="col-md-4">
