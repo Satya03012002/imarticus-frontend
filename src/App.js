@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-    <GoogleOAuthProvider clientId={CLIENT_ID}>
+    <GoogleOAuthProvider clientId="1023644875961-6di7ndbrkr42rg9q2rd4u2n0je6b7kde.apps.googleusercontent.com">
       <Routes>
     
         <Route path="/" exact={true} element={<Course />}></Route>
