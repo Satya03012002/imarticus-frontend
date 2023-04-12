@@ -75,10 +75,16 @@ function Page1() {
     }
 
    
+    const handlelogin = ()=>{
+
+      navigate("/")
+
+    }
+
     
       return (
         <>
-          <Card style={{ width: '18rem', margin:'auto' }}>
+          <Card style={{ width: '18rem', margin:'auto' ,marginTop : '100px', padding: "10px"}}>
     
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -96,10 +102,17 @@ function Page1() {
                 <Form.Control type="password" placeholder="confirmPassword" name="confirmPassword" onChange={handleUser}/>
               </Form.Group>  
     
-              <Button  variant="primary" type="submit" onClick={handleSubmit}>
-              
+              <div style={{display : "flex", justifyContent : "space-between"}}>
+             <Button  variant="primary" type="submit" onClick={handleSubmit}>
                 Submit
               </Button>
+
+              <Button  variant="primary" type="submit" onClick={handlelogin}>
+              click for login
+              </Button>
+             </div>
+              
+               
             
             </Form>
           

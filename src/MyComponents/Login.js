@@ -96,10 +96,6 @@ function Login() {
 
     
 
-    const logOut = () => {
-        googleLogout();
-        setProfile(null);
-    };
 
 
     useEffect(() => {
@@ -139,7 +135,7 @@ function Login() {
     
       return (
         <>
-          <Card style={{ width: '18rem', margin:'auto' , marginTop : '100px'}}>
+          <Card style={{ width: '18rem', margin:'auto' , marginTop : '100px', padding: "10px"}}>
     
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -152,17 +148,19 @@ function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" name="password" onChange={handleUser} />
               </Form.Group>
-            
-              <Button  variant="primary" type="submit" onClick={handleSubmit}>
+             <div style={{display : "flex", justifyContent : "space-between"}}>
+             <Button  variant="primary" type="submit" onClick={handleSubmit}>
                 Submit
               </Button>
 
               <Button  variant="primary" type="submit" onClick={handleSignin}>
               click for signin
               </Button>
+             </div>
+           
             </Form>
           
-        <div style={{ display: "flex", flexDirection: "row-reverse", margin: "10px" }}>
+        <div style={{ display: "flex", justifyContent : "center", margin: "10px" }}>
                     <button onClick={() => login()}>Sign in with Google 🚀 </button>
                 </div>
          
