@@ -7,9 +7,10 @@ import Topic from './Topic';
 
 
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-
+import { useNavigate } from "react-router-dom";
 
 function Course() {
+    const navigate = useNavigate();
 
 
     const [courseData, setcourseData] = useState({})
@@ -22,10 +23,10 @@ function Course() {
     const [ user, setUser ] = useState([]);
     const [ profile, setProfile ] = useState([]);
 
-    const login = useGoogleLogin({
-        onSuccess: (codeResponse) => setUser(codeResponse),
-        onError: (error) => console.log('Login Failed:', error)
-    });
+    // const login = useGoogleLogin({
+    //     onSuccess: (codeResponse) => setUser(codeResponse),
+    //     onError: (error) => console.log('Login Failed:', error)
+    // });
 
 
 
@@ -64,6 +65,8 @@ function Course() {
     const logOut = () => {
         googleLogout();
         setProfile(null);
+        navigate("/")
+
     };
 
 
@@ -104,30 +107,13 @@ function Course() {
 
     return (
         <>
-      
-            {profile ? (
+    
 
-                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                    <div style={{ display: "flex", margin: "5px" }}>
-
-                        <img src={profile.picture} alt="user image" />
-                       
-                        <div style={{ margin: "5px" }}>
-                            <p>Name: {profile.name}</p>
-                            <p>Email Address: {profile.email}</p>
-                        </div>
-
-                    
-                    </div>
+            <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+                
                     <div><button onClick={logOut} style={{ margin: "5px" }}>Log out</button></div>
                     
                 </div>
-            ) : (
-                <div style={{ display: "flex", flexDirection: "row-reverse", margin: "10px" }}>
-                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
-                </div>
-            )}
-            {/* </nav> */}
 
 
 
