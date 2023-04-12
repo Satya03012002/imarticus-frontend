@@ -109,9 +109,9 @@ function Course() {
         <>
     
 
-            <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+            <div style={{ display: "flex", flexDirection: "row-reverse", margin:"10px" }}>
                 
-                    <div><button onClick={logOut} style={{ margin: "5px" }}>Log out</button></div>
+                    <div><button onClick={logOut} style={{ margin: "5px" , padding:"10px"}}>Log out</button></div>
                     
                 </div>
 
