@@ -6,6 +6,7 @@ import Course from "./MyComponents/Course";
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from "./MyComponents/Login";
+
 import Page1 from "./MyComponents/Page1";
 
 
